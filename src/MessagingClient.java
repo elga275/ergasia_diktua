@@ -15,14 +15,18 @@ public class MessagingClient {
             socket = new Socket(ip, port);
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-
         } catch (Exception e) {
             System.err.println("Could not initiate a connection to server");
             System.exit(1);
         }
 
+        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
+        String commandFromUser = stdin.readLine();
+        if (commandFromUser!=null){
+            //String[] parts = command.split(" ");
+            out.println(commandFromUser);
+        }
 
         out.close();
         in.close();

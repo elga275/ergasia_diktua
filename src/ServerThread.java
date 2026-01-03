@@ -22,6 +22,40 @@ public class ServerThread extends Thread {
             if(command!=null){
                 String[] parts = command.split(" ");
                 int function_id = Integer.parseInt(parts[2]);
+
+                if (function_id==1){
+                    String username = parts[3];
+                    String response = server.createAccount(username);
+                    out.println(response);
+                }
+                else if (function_id==2){
+                    String response = server.showAccounts();
+                    out.println(response);
+                }
+                else if (function_id==3){
+                    int authToken=Integer.parseInt(parts[3]);
+                    String recipient=parts[4];
+                    String message=parts[5];
+                    String response = server.sendMessage(authToken,recipient,message);
+                    out.println(response);
+                }
+                else if (function_id==4){
+                    int authToken=Integer.parseInt(parts[3]);
+                    String response = server.showInbox(authToken);
+                    out.println(response);
+                }
+                else if (function_id==5){
+                    int authToken = Integer.parseInt(parts[3]);
+                    int messageID = Integer.parseInt(parts[4]);
+                    String response = server.readMessage(authToken, messageID);
+                    out.println(response);
+                }
+                else if (function_id==6){
+                    int authToken = Integer.parseInt(parts[3]);
+                    int messageID = Integer.parseInt(parts[4]);
+                    String response = server.deleteMessage(authToken, messageID);
+                    out.println(response);
+                }
             }
 
 
