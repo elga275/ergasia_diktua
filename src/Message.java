@@ -24,10 +24,6 @@ public class Message {
         return sender;
     }
 
-    public String getReceiver() {
-        return receiver;
-    }
-
     public String getBody() {
         return body;
     }
@@ -39,21 +35,5 @@ public class Message {
     //setters
     public void setIsRead(boolean read) {
         isRead = read;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
-
-    public void setReceiver(String receiver) {
-        this.receiver = receiver;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public void setMessageID(int messageID) {
-        this.messageID = messageID;
     }
 }

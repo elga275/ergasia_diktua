@@ -23,18 +23,4 @@ public class Account {
     public List<Message> getMessageBox() {
         return messageBox;
     }
-
-
-    //setters
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setAuthToken(int authToken) {
-        this.authToken = authToken;
-    }
-
-    public void setMessageBox(List<Message> messageBox) {
-        this.messageBox = messageBox;
-    }
 }
