@@ -1,15 +1,17 @@
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class MessagingServer {
     private int counter;
-    private ArrayList<Account> accounts;
+    private List<Account> accounts;
 
     public MessagingServer(){
         counter=1;
-        accounts = new ArrayList<>();
+        accounts = Collections.synchronizedList(new ArrayList<>());
     }
 
     //generates a unique auth token for every user
@@ -50,7 +52,7 @@ public class MessagingServer {
             }
         }
 
-        Account acc = new Account(username,generateUniqueToken(),new ArrayList<Message>());
+        Account acc = new Account(username,generateUniqueToken());
         accounts.add(acc);
         return String.valueOf(acc.getAuthToken());
     }

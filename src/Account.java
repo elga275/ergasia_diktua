@@ -1,16 +1,14 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Account {
     private String username;
     private int authToken;
     private List<Message> messageBox;
 
-    public Account(String us, int t, List<Message> mb){
+    public Account(String us, int t){
         username=us;
         authToken=t;
-        messageBox=mb;
+        messageBox= Collections.synchronizedList(new ArrayList<>());
     }
 
     //getters

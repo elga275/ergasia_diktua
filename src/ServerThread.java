@@ -9,7 +9,6 @@ public class ServerThread extends Thread {
         super();
         this.socket = socket;
         this.server=server;
-        this.start();
     }
 
 
@@ -21,10 +20,10 @@ public class ServerThread extends Thread {
             String command = in.readLine();
             if(command!=null){
                 String[] parts = command.split(" ");
-                int function_id = Integer.parseInt(parts[2]);
+                int function_id = Integer.parseInt(parts[0]);
 
                 if (function_id==1){
-                    String username = parts[3];
+                    String username = parts[1];
                     String response = server.createAccount(username);
                     out.println(response);
                 }
@@ -33,31 +32,35 @@ public class ServerThread extends Thread {
                     out.println(response);
                 }
                 else if (function_id==3){
-                    int authToken=Integer.parseInt(parts[3]);
-                    String recipient=parts[4];
-                    String message=parts[5];
-                    String response = server.sendMessage(authToken,recipient,message);
+                    int authToken=Integer.parseInt(parts[1]);
+                    String recipient=parts[2];
+
+                    StringBuilder message = new StringBuilder();
+                    for (int i=3; i< parts.length; i++){
+                        message.append(parts[i]).append(" ");
+                    }
+
+                    String response = server.sendMessage(authToken,recipient,message.toString());
                     out.println(response);
                 }
                 else if (function_id==4){
-                    int authToken=Integer.parseInt(parts[3]);
+                    int authToken=Integer.parseInt(parts[1]);
                     String response = server.showInbox(authToken);
                     out.println(response);
                 }
                 else if (function_id==5){
-                    int authToken = Integer.parseInt(parts[3]);
-                    int messageID = Integer.parseInt(parts[4]);
+                    int authToken = Integer.parseInt(parts[1]);
+                    int messageID = Integer.parseInt(parts[2]);
                     String response = server.readMessage(authToken, messageID);
                     out.println(response);
                 }
                 else if (function_id==6){
-                    int authToken = Integer.parseInt(parts[3]);
-                    int messageID = Integer.parseInt(parts[4]);
+                    int authToken = Integer.parseInt(parts[1]);
+                    int messageID = Integer.parseInt(parts[2]);
                     String response = server.deleteMessage(authToken, messageID);
                     out.println(response);
                 }
             }
-
 
             out.close();
             in.close();
